@@ -1,0 +1,11 @@
+/backend/build/
+/backend/.gradle/
+/backend/data/
+/backend/bin/
+/backend/out/
+*.class
+*.jar
+*.war
+.DS_Store
+.idea/
+*.iml

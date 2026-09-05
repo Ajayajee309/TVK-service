@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Complaint | DINDIGUL மக்கள் சேவை</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .timeline {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        .timeline li {
+            padding: 15px;
+            border-left: 4px solid var(--border-color);
+            position: relative;
+            margin-bottom: 15px;
+        }
+        .timeline li::before {
+            content: '';
+            width: 16px;
+            height: 16px;
+            background: var(--border-color);
+            border-radius: 50%;
+            position: absolute;
+            left: -10px;
+            top: 15px;
+        }
+        
+        .timeline li.active-Pending { border-left-color: #FFC107; }
+        .timeline li.active-Pending::before { background: #FFC107; }
+        
+        .timeline li.active-In\ Progress { border-left-color: #007BFF; }
+        .timeline li.active-In\ Progress::before { background: #007BFF; }
+        
+        .timeline li.active-Resolved { border-left-color: #28A745; }
+        .timeline li.active-Resolved::before { background: #28A745; }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 4px;
+            color: white;
+            font-weight: bold;
+        }
+        .bg-pending { background: #FFC107; color: #333; }
+        .bg-inprogress { background: #007BFF; }
+        .bg-resolved { background: #28A745; }
+        
+        .detail-row {
+            display: flex;
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+        }
+        .detail-row span:first-child {
+            width: 150px;
+            font-weight: bold;
+            color: var(--text-light);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">
+            <img src="images/tvk-logo.png" class="logo-circle" alt="TVK Logo" style="object-fit: cover; background: white;">
+            <div class="header-text">
+                <h1>DINDIGUL மக்கள் சேவை</h1>
+                <p>Track Complaint</p>
+            </div>
+        </div>
+        <a href="index.html" style="color: var(--text-dark); text-decoration: none; font-weight: bold;">Home</a>
+    </header>
+
+    <div class="container">
+        <div class="section-card">
+            <h2 class="section-title">🔍 புகாரை தேட (Track Status)</h2>
+            <div class="form-group">
+                <input type="text" id="searchId" placeholder="Enter Complaint ID (e.g. DGL-2026-000001)" required>
+                <button id="trackBtn" class="btn btn-primary" style="margin-top: 10px;">Search</button>
+            </div>
+            <div id="alertBox" class="alert"></div>
+        </div>
+
+        <div id="resultCard" class="section-card" style="display: none;">
+            <h2 class="section-title" id="resultTitle">Complaint Details</h2>
+            
+            <div class="detail-row"><span>ID:</span> <span id="r_id"></span></div>
+            <div class="detail-row"><span>Name:</span> <span id="r_name"></span></div>
+            <div class="detail-row"><span>Category:</span> <span id="r_category"></span></div>
+            <div class="detail-row"><span>Issue:</span> <span id="r_title"></span></div>
+            <div class="detail-row"><span>Location:</span> <span id="r_location"></span></div>
+            <div class="detail-row"><span>Priority:</span> <span id="r_priority"></span></div>
+            <div class="detail-row"><span>Submitted:</span> <span id="r_date"></span></div>
+            <div class="detail-row"><span>Status:</span> <span id="r_status_badge"></span></div>
+
+            <h3 style="margin-top: 20px;">Timeline</h3>
+            <ul class="timeline" id="timelineList">
+                <!-- Injected via JS -->
+            </ul>
+            
+            <div id="adminRemarksBlock" style="display: none; margin-top: 20px; padding: 15px; background: #fff3cd; border-left: 4px solid #ffeeba;">
+                <strong>Admin Remarks:</strong> <span id="r_remarks"></span>
+            </div>
+
+            <!-- New Block for User Feedback -->
+            <div id="userFeedbackBlock" style="display: none; margin-top: 20px; padding: 15px; border: 1px solid var(--border-color); border-radius: 8px;">
+                <h3>Did this solve your problem? (உங்கள் பிரச்சனை தீர்க்கப்பட்டதா?)</h3>
+                <div style="display: flex; gap: 10px; margin-top: 10px;">
+                    <button class="btn btn-primary" onclick="submitUserFeedback('Yes, Resolved')" style="background: #28A745; width: auto;">✅ Yes, Resolved (தீர்க்கப்பட்டது)</button>
+                    <button class="btn btn-primary" onclick="submitUserFeedback('No, Not Resolved')" style="background: #dc3545; width: auto;">❌ No, Not Resolved (இல்லை)</button>
+                </div>
+            </div>
+            
+            <div id="userFeedbackResult" style="display: none; margin-top: 20px; padding: 15px; background: #d4edda; border-left: 4px solid #28a745;">
+                <strong>Your Feedback (உங்கள் பதில்):</strong> <span id="r_feedback"></span>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/track.js"></script>
+</body>
+</html>

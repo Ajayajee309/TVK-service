@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DINDIGUL மக்கள் சேவை | Dindigul Public Complaint Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">
+            <img src="images/tvk-logo.png" class="logo-circle" alt="TVK Logo" style="object-fit: cover; background: white;">
+            <div class="header-text">
+                <h1>DINDIGUL மக்கள் சேவை</h1>
+                <p>Dindigul Public Complaint Portal</p>
+            </div>
+        </div>
+        <button class="hamburger">☰</button>
+    </header>
+
+    <div class="container">
+        <div id="alertBox" class="alert"></div>
+
+        <form id="complaintForm" enctype="multipart/form-data">
+            
+            <!-- Section 1 -->
+            <div class="section-card">
+                <h2 class="section-title">👤 1. மக்கள் விவரங்கள்</h2>
+                <span class="help-text">கீழே உள்ள படிவத்தை பூர்த்தி செய்து உங்கள் பிரச்சினையை பதிவு செய்யவும்.</span>
+                
+                <div class="form-group">
+                    <label>பெயர் (Name) *</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your name">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>மொபைல் எண் (Mobile Number) *</label>
+                        <input type="text" id="mobile" name="mobile" required placeholder="Enter 10-digit mobile number" pattern="[0-9]{10}">
+                    </div>
+                    <div class="form-group">
+                        <label>மின்னஞ்சல் (Email) - விருப்பப்பட்டால்</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email (optional)">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2 -->
+            <div class="section-card">
+                <h2 class="section-title">⚠️ 2. பிரச்சினை விவரங்கள்</h2>
+                
+                <div class="form-group">
+                    <label>பிரச்சினை வகை (Category) *</label>
+                    <select id="category" name="category" required>
+                        <option value="">-- Select Category --</option>
+                        <option value="சாலை பிரச்சினை / Road Issue">சாலை பிரச்சினை / Road Issue</option>
+                        <option value="குடிநீர் பிரச்சினை / Water Supply">குடிநீர் பிரச்சினை / Water Supply</option>
+                        <option value="தெருவிளக்கு / Street Light">தெருவிளக்கு / Street Light</option>
+                        <option value="கழிவுநீர் / Drainage">கழிவுநீர் / Drainage</option>
+                        <option value="குப்பை / தூய்மை / Garbage">குப்பை / தூய்மை / Garbage</option>
+                        <option value="மின்சார பிரச்சினை / Electricity">மின்சார பிரச்சினை / Electricity</option>
+                        <option value="போக்குவரத்து / Traffic">போக்குவரத்து / Traffic</option>
+                        <option value="பொது கழிப்பிடம் / Public Toilet">பொது கழிப்பிடம் / Public Toilet</option>
+                        <option value="அரசு பொது வசதி / Public Facility">அரசு பொது வசதி / Public Facility</option>
+                        <option value="மற்றவை / Others">மற்றவை / Others</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="otherCategoryBox" style="display: none;">
+                    <label>மற்றவை என்றால் விவரம் (Specify if 'Others') *</label>
+                    <input type="text" id="otherCategory" placeholder="Please specify your category">
+                </div>
+
+                <div class="form-group">
+                    <label>தலைப்பு (Complaint Title) *</label>
+                    <input type="text" id="title" name="title" required placeholder="Brief title of the issue">
+                </div>
+
+                <div class="form-group">
+                    <label>பிரச்சினை விவரம் (Complaint Description) *</label>
+                    <textarea id="description" name="description" rows="4" required placeholder="Describe the problem in detail..."></textarea>
+                </div>
+            </div>
+
+            <!-- Section 3 -->
+            <div class="section-card">
+                <h2 class="section-title">📍 3. பிரச்சினை உள்ள இடம்</h2>
+                
+                <div class="form-group">
+                    <label>பகுதி (Area) *</label>
+                    <input type="text" id="area" name="area" required placeholder="e.g. Begampur, R.M. Colony">
+                </div>
+
+                <div class="form-group">
+                    <label>தெரு / சரியான இடம் (Street / Location) *</label>
+                    <input type="text" id="street" name="street" required placeholder="e.g. 1st Main Street">
+                </div>
+
+                <div class="form-group">
+                    <label>Landmark</label>
+                    <input type="text" id="landmark" name="landmark" placeholder="Near temple, hospital, etc.">
+                </div>
+
+                <button type="button" class="btn-location" id="btnLocation">
+                    📍 Use My Current Location
+                </button>
+                <input type="hidden" id="latitude" name="latitude">
+                <input type="hidden" id="longitude" name="longitude">
+                <span id="locationStatus" class="help-text"></span>
+            </div>
+
+            <!-- Section 4 -->
+            <div class="section-card">
+                <h2 class="section-title">🚩 4. முன்னுரிமை</h2>
+                
+                <div class="form-group">
+                    <label>முன்னுரிமை நிலை (Priority) *</label>
+                    <select id="priority" name="priority" required>
+                        <option value="Normal">Normal</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                        <option value="Emergency">Emergency</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Section 5 -->
+            <div class="section-card">
+                <h2 class="section-title">🖼️ 5. புகைப்படம் / ஆதாரம் (விருப்பப்பட்டால்)</h2>
+                
+                <div class="upload-area" id="uploadArea">
+                    <div style="font-size: 30px;">📷</div>
+                    <p>புகைப்படத்தை பதிவேற்றவும்<br>(Click to upload image or capture)</p>
+                    <input type="file" id="images" name="images" accept="image/*" multiple style="display: none;">
+                </div>
+                <div id="imagePreview"></div>
+            </div>
+
+            <div style="text-align: center; margin-top: 20px; margin-bottom: 40px;">
+                <button type="submit" class="btn btn-primary" id="submitBtn">📩 புகாரை பதிவு செய்யவும்</button>
+            </div>
+            
+            <div style="text-align: center; margin-bottom: 20px;">
+                <a href="track.html" style="color: var(--text-light); text-decoration: underline;">புகார் நிலையை பார்க்க (Track Complaint)</a>
+            </div>
+
+        </form>
+
+        <!-- Success View (Hidden by default) -->
+        <div id="successView" style="display: none; text-align: center; padding: 40px 10px;">
+            <div style="font-size: 60px; color: #28a745;">✅</div>
+            <h2 style="margin: 20px 0; color: #333;">உங்கள் புகார் வெற்றிகரமாக பதிவு செய்யப்பட்டது!</h2>
+            <p>உங்கள் புகார் எண்:</p>
+            <h1 id="successComplaintId" style="color: var(--primary-red); margin-bottom: 30px; border: 2px dashed var(--primary-yellow); padding: 10px; display: inline-block;"></h1>
+            
+            <div style="display: flex; gap: 15px; justify-content: center; flex-direction: column; align-items: center;">
+                <button onclick="window.location.href='track.html'" class="btn btn-primary">புகார் நிலையை பார்க்க</button>
+                <button onclick="window.location.reload()" class="btn btn-location">முகப்பு பக்கம்</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
