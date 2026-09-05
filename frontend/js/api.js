@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:8080/api';
+const API_BASE_URL = 'https://tvk-service.onrender.com/api';
 
 async function submitComplaint(formData) {
     try {
